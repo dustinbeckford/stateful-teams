@@ -14,6 +14,38 @@ function App() {
     { name: "justin", img: justin },
   ];
   const [students, setStudents] = useState(studentData);
+  const [bcArray, setBcArray] = useState([]);
+  const [binaryArray, setBinaryArray] = useState([]);
+
+  const removeFromStudents = (studentToRemove, targetArray) => {
+    if (students.includes(studentToRemove) === true) {
+      setStudents((prevStudents) =>
+        prevStudents.filter((student) => student.name !== studentToRemove.name)
+      );
+    }
+
+    if (bcArray.includes(studentToRemove) === true) {
+      setBcArray((prevStudents) =>
+        prevStudents.filter((student) => student.name !== studentToRemove.name)
+      );
+    }
+
+    if (binaryArray.includes(studentToRemove) === true) {
+      setBinaryArray((prevStudents) =>
+        prevStudents.filter((student) => student.name !== studentToRemove.name)
+      );
+    }
+
+    if (targetArray === "bcArray") {
+      setBcArray((prevBcArray) => [...prevBcArray, studentToRemove]);
+    } else if (targetArray === "binaryArray") {
+      setBinaryArray((prevBinaryArray) => [
+        ...prevBinaryArray,
+        studentToRemove,
+      ]);
+    }
+  };
+
   return (
     <div className="topcontainer">
       <h1>Student Team React Challenge</h1>
@@ -26,7 +58,12 @@ function App() {
         Reset
       </button>
       <div className="App">
-        <MainContainer students={students} />
+        <MainContainer
+          students={students}
+          bcArray={bcArray}
+          binaryArray={binaryArray}
+          removeFromStudents={removeFromStudents}
+        />
       </div>
     </div>
   );
