@@ -8,10 +8,10 @@ import justin from "./assets/justin.png";
 
 function App() {
   const studentData = [
-    { name: "dustin", img: dustin },
-    { name: "daniel", img: daniel },
-    { name: "max", img: max },
-    { name: "justin", img: justin },
+    { name: "dustin", img: dustin, team:"default"  },
+    { name: "daniel", img: daniel, team:"default"  },
+    { name: "max", img: max, team:"default" },
+    { name: "justin", img: justin, team:"default"  },
   ];
   const [students, setStudents] = useState(studentData);
   const [bcArray, setBcArray] = useState([]);
@@ -37,11 +37,11 @@ function App() {
     }
 
     if (targetArray === "bcArray") {
-      setBcArray((prevBcArray) => [...prevBcArray, studentToRemove]);
+      setBcArray((prevBcArray) => [...prevBcArray, {...studentToRemove, team: "BC Crew"}]);
     } else if (targetArray === "binaryArray") {
       setBinaryArray((prevBinaryArray) => [
         ...prevBinaryArray,
-        studentToRemove,
+        {...studentToRemove, team: "Binary Bots"}
       ]);
     }
   };
@@ -51,9 +51,11 @@ function App() {
       <h1>Student Team React Challenge</h1>
       <button
         className="button-24"
-        onClick={() =>
-          console.log("I should reset you back to all being in default")
-        }
+        onClick={() => {
+           setStudents(studentData);
+          setBcArray([]);
+           setBinaryArray([]);
+        }}
       >
         Reset
       </button>
